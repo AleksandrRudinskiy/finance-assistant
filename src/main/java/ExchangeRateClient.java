@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExchangeRateClient {
-
     private String RATES_URI = "https://functions.yandexcloud.net/d4ed1i6t3f80hf0p7mer?base=RUB&symbols=USD,EUR,JPY";
     private List<Double> currentExchangeRates = new ArrayList<>();
 

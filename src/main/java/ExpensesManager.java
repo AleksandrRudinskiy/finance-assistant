@@ -55,40 +55,34 @@ public class ExpensesManager {
         System.out.println("Траты удалены.");
     }
 
-    double getExpensesSum(){// Напишите метод для получения суммы всех трат
-        double sumRez  =0.0;
-
-        for (String category : expensesByCategories.keySet()){
-            double sum = 0.0;
-            for (Double expense : expensesByCategories.get(category)){
-                sum += expense;
-            }
+    double getExpensesSum() {
+        double sumRez = 0.0;
+        for (String category : expensesByCategories.keySet()) {
+            double sum = expensesByCategories.get(category).stream()
+                    .mapToDouble(x -> x)
+                    .sum();
             sumRez += sum;
         }
-
         return sumRez;
     }
 
-    void removeCategory(String category){// Напишите метод для удаления категории
-        expensesByCategories.remove(category);
-    }
-
-    String getMaxCategoryName() { // Напишите метод для получения категории, где размер трат больше всего
-        // Используйте эти переменные для сохранения промежуточных значений
+    String getMaxCategoryName() {
         double maxCategorySum = 0;
         String maxCategoryName = "";
-
-        for (String category : expensesByCategories.keySet()){
-            double sum = 0.0;
-            for (Double expense : expensesByCategories.get(category)){
-                sum += expense;
-            }
-            if (sum>maxCategorySum) {
-                maxCategorySum=sum;
+        for (String category : expensesByCategories.keySet()) {
+            double sum = expensesByCategories.get(category).stream()
+                    .mapToDouble(x -> x)
+                    .sum();
+            if (sum > maxCategorySum) {
+                maxCategorySum = sum;
                 maxCategoryName = category;
             }
 
         }
         return maxCategoryName;
+    }
+
+    void removeCategory(String category) {
+        expensesByCategories.remove(category);
     }
 }
